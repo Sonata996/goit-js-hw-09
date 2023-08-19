@@ -35,7 +35,7 @@ function onDataSelection(selectedDates) {
   if (selectedDates || picker.selectedDates.length > 0) {
     selectedDate = selectedDates ? selectedDates[0].getTime() : picker.selectedDates[0].getTime();
     currentDate = new Date().getTime();
-    if (selectedDate > currentDate || selectedDate - currentDate <= 1000) {
+    if (selectedDate > currentDate) {
       clearInterval(countdownInterval);
       const result = selectedDate - currentDate;
       const timeObj = convertMs(result);
@@ -43,10 +43,11 @@ function onDataSelection(selectedDates) {
       countdownInterval = setInterval(() => {
         currentDate = new Date().getTime();
         const remainingTime = selectedDate - currentDate;
-        if (remainingTime <= 0) {
+        if (remainingTime <= 1000) {
           clearInterval(countdownInterval);
           onAdditionTimerMarkup({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         } else {
+          HTMLElement.startBtnInput.disabled = true;
           const timeObj = convertMs(remainingTime);
           onAdditionTimerMarkup(timeObj);
         }

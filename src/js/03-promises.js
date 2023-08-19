@@ -24,7 +24,7 @@ function createPromise(position, delay) {
         // Reject
         rej({ position, delay })
       }
-    },position)
+    },delay)
     })
 }
   
@@ -36,10 +36,9 @@ function onClickGeneratorPromises(event) {
   let counterPosition = 0
   
 
-  for (let i = 0; i < valueAmount; i += 1) {
-   let promiseDelay = valueDelay + valueStep * i;
-    counterPosition += 1
-    createPromise(counterPosition, promiseDelay)
+  for (let i = 1; i <= valueAmount; i += 1) {
+    const foo = valueDelay + valueStep * (i -1);
+    createPromise(i, foo)
       .then(({ position, delay }) => {
         console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })

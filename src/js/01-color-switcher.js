@@ -12,12 +12,12 @@ btnStop.addEventListener('click', onClickStopRandomColor)
 function onClickStartRandomColor() {
     body.style.backgroundColor = getRandomHexColor()
     document.querySelector('[data-start]').disabled = true;
-    timeInterval = setInterval(() => {
+    timerId = setInterval(() => {
         body.style.backgroundColor = getRandomHexColor()
     }, 1000)
     
 }
 function onClickStopRandomColor() {
-    clearInterval(timeInterval)
+    clearInterval(timerId)
     document.querySelector('[data-start]').disabled = false;
 }
