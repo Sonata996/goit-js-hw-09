@@ -18,11 +18,12 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    onDataSelection(selectedDates);
+      HTMLElement.startBtnInput.disabled = false;
+  
   },
 };
 HTMLElement.startBtnInput.addEventListener('click', () => {
-  onDataSelection(null);
+  onDataSelection(options.selectedDates);
 });
 // HTMLElement.inputTimer.addEventListener('input', onDataSelection)
 
@@ -34,8 +35,7 @@ function onDataSelection(selectedDates) {
   if (selectedDates || picker.selectedDates.length > 0) {
     selectedDate = selectedDates ? selectedDates[0].getTime() : picker.selectedDates[0].getTime();
     currentDate = new Date().getTime();
-    if (selectedDate > currentDate) {
-      HTMLElement.startBtnInput.disabled = false;
+    if (selectedDate > currentDate || selectedDate - currentDate <= 1000) {
       clearInterval(countdownInterval);
       const result = selectedDate - currentDate;
       const timeObj = convertMs(result);
